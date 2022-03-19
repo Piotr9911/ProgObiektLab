@@ -1,4 +1,8 @@
 ﻿namespace ConsoleApp
+﻿using System;
+using System.Threading.Tasks;
+
+namespace ConsoleApp
 {
     public class Program
     {
@@ -14,7 +18,7 @@
             student1.AddTask("Taks B", TaskStatus.Waiting);
             student1.AddTask("Taks C", TaskStatus.Rejected);
 
-            student2.AddTask("Taks A", TaskStatus.Waiting);
+            /*student2.AddTask("Taks A", TaskStatus.Waiting);
             student2.AddTask("Taks B", TaskStatus.Waiting);
             student2.AddTask("Taks C", TaskStatus.Rejected);
 
@@ -24,23 +28,22 @@
 
             student3.UpdateTask(1, TaskStatus.Done);
             student3.UpdateTask(2, TaskStatus.Progress);
-
+            */
             Person[] persons = { treacher, student1, student2, student3 };
             Classroom classroom = new Classroom("Sala Komputerowa", persons);
-
+            
             Console.WriteLine(classroom);
-
             Console.WriteLine("student1 == student2: " + student1.Equals(student2)); // Output: student1 == student2: true
-            Console.WriteLine("student1 == student3: " + student1.Equals(student3)); // Output: student1 == student3: false*/
+            Console.WriteLine("student1 == student3: " + student1.Equals(student3)); // Output: student1 == student3: false
         }
         public class Person
         {
-            private string name;
-            private int age;
+            private string name { get; set; }
+            private int age { get; set; }
             public Person(string name, int age)
                 {
                 this.name = name;
-                string v = age.ToString();
+                this.age = age;
 
                 }
         }
@@ -51,21 +54,40 @@
 
             public Teacher(string name, int age) :  base(name, age)
             {
-
             }
 
         }
+
+        
         public class Student : Person
         {
             public Person student1 { get; set; }
             public Person student2 { get; set; }
             public Person student3 { get; set; }
 
-            public Student(string name, int age, string v) : base(name,age)
+            public Student(string name, int age, string group) : base(name,age)
             {
-
             }
-            
+
+            internal void AddTask(string v, object rejected)
+            {
+               
+            }
+        }
+        class Classroom
+        {
+            private string v;
+            private Person[] persons;
+
+            public Classroom(string v, Person[] persons)
+            {
+                this.v = v;
+                this.persons = persons;
+            }
+            public override string ToString()
+            {
+                return ($"{v}{persons}");
+            }
         }
     }
 }
